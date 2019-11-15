@@ -1,0 +1,25 @@
+version: '2.1'
+
+networks:
+  monitor-net:
+    driver: bridge
+
+volumes:
+    volume_data: {}
+
+services:
+
+  webgenerator:
+    image: ludonx/webgenerator
+    command: ./app.sh
+    volumes:
+    - volume_data:/tmp/
+    links:
+    - nginx
+  
+  nginx:
+    image: nginx
+    ports:
+    - "1234:80"
+    volumes:
+    - volume_data:/usr/share/nginx/html/
