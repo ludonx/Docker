@@ -10,16 +10,16 @@ volumes:
 services:
 
   webgenerator:
-    image: ludonx/webgenerator
+    image: webgenerator
     command: ./app.sh
     volumes:
     - volume_data:/tmp/
     links:
-    - nginx
+    - webserver
   
-  nginx:
+  webserver:
     image: nginx
     ports:
-    - "1234:80"
+    - "8089:80"
     volumes:
     - volume_data:/usr/share/nginx/html/
